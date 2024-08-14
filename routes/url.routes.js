@@ -7,10 +7,10 @@ const {
 } = require("../controllers/url.controllers");
 const checkID = require("../middlewares/url.middlewares");
 
-router.post("/url", createShortURL);
+router.post("/", createShortURL);
 
 router.get("/:id", checkID, redirectUser);
 
-router.get("/url/analytics/:id", checkID, getAnalytics);
+router.get("/analytics/:id", checkID, getAnalytics);
 
 module.exports = router;

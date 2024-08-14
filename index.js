@@ -5,16 +5,23 @@ const app = express();
 const connectDB = require("./db/url.db");
 const DB_URL = dotenv.parsed.DATABASE_URL;
 const UrlRoutes = require("./routes/url.routes");
+const staticRoute = require("./routes/static.routes");
+const path = require("path");
 
 // middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// define view engine
+app.set("view engine", "ejs");
+app.set("views", path.resolve("./views"));
+
 // Database Connection
 connectDB(DB_URL);
 
 // URL Routes middleware
-app.use("/", UrlRoutes);
+app.use("/url", UrlRoutes);
+app.use("/", staticRoute);
 
 // sever listener
 app.listen(PORT, () => {

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home - URL Shortener</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      input {
+        padding: 10px 5px;
+        width: 20%;
+        outline: none;
+      }
+
+      button {
+        font-family: 1.2rem;
+        padding: 10px 15px;
+        background-color: #dfdfdf;
+        border: none;
+        border: 1px solid gray;
+      }
+
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        margin: 40px auto 0px auto;
+      }
+      th,
+      td {
+        padding: 20px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>URL Shortener</h1>
+    <% if (locals.url) { %>
+    <p>URL Generated <%= url %></p>
+    <% } %>
+    <form action="/url" method="post">
+      <label for="url">Enter Your URL:</label>
+      <input
+        type="text"
+        name="url"
+        id="url"
+        placeholder="https://www.example.com"
+      />
+      <button type="submit">Generate URL</button>
+    </form>
+    <% if (locals.all_urls) { %>
+    <table border="1">
+      <tr>
+        <th>S. No</th>
+        <th>Short ID</th>
+        <th>Original URL</th>
+        <th>Clicks</th>
+      </tr>
+      <% locals.all_urls.forEach((url, index) => { %>
+      <tr>
+        <td><%= index +1%></td>
+        <td><%= url.shortID%></td>
+        <td><%= url.originalURL %></td>
+        <td><%= url.visitHistory.length %></td>
+      </tr>
+      <% }) %>
+    </table>
+    <% } %>
+  </body>
+</html>

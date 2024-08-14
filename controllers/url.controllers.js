@@ -20,8 +20,8 @@ async function createShortURL(req, res) {
     visitHistory: [],
   });
 
-  return res.status(200).json({
-    message: `your short URL is - http://localhost:8000/${id}`,
+  return res.status(200).render("index", {
+    url: ` http://localhost:8000/url/${id}`,
   });
 }
 
